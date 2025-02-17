@@ -65,8 +65,12 @@
                             <td><input min="1" max="<?= $m["stok"] ?>" type="number" name="jumlah" required></td>
                         </tr>
                         <tr>
-                            <td colspan="3">
+                            <td colspan="2">
                                 <button type="submit" name="pesan" class="btn btn-primary btn-block">Pesan</button>
+                            </td>
+                            <td colspan="1">
+                                <a href="index.php?pesanan_saya">Lihat Pesanan
+                                    Saya</a>
                             </td>
                         </tr>
                     </table>

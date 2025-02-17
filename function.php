@@ -1,8 +1,6 @@
 <?php
 
-
 $koneksi = mysqli_connect("localhost", "root", "root", "toko_buku_ftti");
-
 
 session_start();
 
@@ -25,7 +23,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 function tambah_pesanan($data) {
     global $koneksi;
 
-    $id_user = $_SESSION['user_id'] ?? 0;
+    $id_user = $_SESSION["akun-user"]['id_user'];
     $id_menu = $data['id_menu'];
     $jumlah = $data['jumlah'];
     $harga = $data['harga'];
@@ -107,23 +105,12 @@ function register_akun()
 // Function Login
 
 function login_akun()
-
 {
-
     global $koneksi;
-
-
-
     $username = htmlspecialchars($_POST["username"]);
-
     $password = md5(htmlspecialchars($_POST["password"]));
-
-
-
     $cek_akun_admin = mysqli_fetch_assoc(mysqli_query($koneksi, "SELECT * FROM `admin` 
-
                                                            WHERE username = '$username' AND 
-
                                                                 `password` = '$password'
 
     "));
@@ -146,7 +133,10 @@ function login_akun()
 
             "username" => $username,
 
-            "password" => $password
+            "password" => $password,
+
+            "id_user" => $cek_akun_user["id_user"]
+
 
         ];
     }

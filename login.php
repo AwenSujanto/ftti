@@ -4,9 +4,14 @@ session_start();
 
 require_once "function.php";
 
-if (isset($_POST["login"])) {
-
-    $login = login_akun();
+    if (isset($_POST["login"])) {
+        $login = login_akun();
+        if ($login) {
+            $_SESSION['user_id'] = $login['id'];
+            $_SESSION['username'] = $login['username'];
+            header("Location: index.php");
+            exit();
+        }
 
 } else if (isset($_POST["register"])) {
 
@@ -30,8 +35,11 @@ if (isset($_POST["login"])) {
 
         </script>";
 
-}
 
+    }
+
+    
+    
 ?>
 
 <!DOCTYPE html>
