@@ -144,21 +144,16 @@ INSERT INTO `menu` (`id_menu`, `kode_menu`, `nama`, `harga`, `gambar`, `kategori
 --
 
 CREATE TABLE `pesanan` (
-  `id_pesanan` int(11) NOT NULL,
-  `kode_pesanan` varchar(12) NOT NULL,
-  `kode_menu` varchar(12) NOT NULL,
-  `qty` int(11) NOT NULL
+  `id_pesanan` int(11) NOT NULL AUTO_INCREMENT,
+  `id_user` int(11) NOT NULL,
+  `id_menu` int(11) NOT NULL,
+  `jumlah` int(11) NOT NULL,
+  `total_harga` decimal(10,2) NOT NULL,
+  `status` enum('pending','diproses','selesai','dibatalkan') DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
+  PRIMARY KEY (`id_pesanan`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `pesanan`
---
-
-INSERT INTO `pesanan` (`id_pesanan`, `kode_pesanan`, `kode_menu`, `qty`) VALUES
-(1, '67b0d54aecb3', 'MN74', 3),
-(2, '67b0d5b6a18d', 'MN74', 12),
-(3, '67b0d75be8bf', 'MN74', 12),
-(4, '67b0d7672116', 'MN74', 2);
 
 -- --------------------------------------------------------
 
@@ -225,7 +220,7 @@ CREATE TABLE `user` (
 --
 
 INSERT INTO `user` (`id_user`, `username`, `password`) VALUES
-(1, 'Abraham', '8e8e58b7e9abfb15872400f54fa51e37');
+(1, 'serius', '7423dbeddc5588b4ec93fdcbb844836c');
 
 --
 -- Indexes for dumped tables
@@ -243,13 +238,6 @@ ALTER TABLE `admin`
 ALTER TABLE `menu`
   ADD PRIMARY KEY (`id_menu`);
 
---
--- Indexes for table `pesanan`
---
-ALTER TABLE `pesanan`
-  ADD PRIMARY KEY (`id_pesanan`);
-
---
 -- Indexes for table `transaksi`
 --
 ALTER TABLE `transaksi`

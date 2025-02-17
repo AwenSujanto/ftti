@@ -26,19 +26,7 @@
 
 </div>
 
-<!-- Pemesanan -->
 
-<form action="index.php" method="POST">
-
-    <div class="d-flex">
-
-        <input class="form-control mx-sm-2 my-2 w-auto" type="text" name="pelanggan" placeholder="Nama Pelanggan" required autocomplete="off">
-
-        <button class="btn btn-success my-2 mx-2" name="pesan">Pesan</button>
-
-    </div>
-
-<!-- Menu Masakan -->
 
 <div class="row">
 
@@ -46,92 +34,58 @@
 
     $i = 1;
 
-    foreach ($menu as $m) { ?>
-
-        <div class="col-sm-4 mx-auto m-2">
-
-            <div class="card">
-
-                <h5 class="card-header bg-info"><?= $m["nama"]; ?></h5>
-
-                <div class="card-body">
-
-                    <p><img class="rounded" src="src/img/<?= $m["gambar"]; ?>" width="150"></p>
-
-                    <input type="hidden" name="kode_menu<?= $i; ?>" value="<?= $m["kode_menu"]; ?>">
-
+   foreach ($menu as $i => $m): ?>
+    <div class="col-sm-4 mx-auto m-2">
+        <div class="card">
+            <h5 class="card-header bg-info"><?= $m["nama"] ?></h5>
+            <div class="card-body">
+                <img class="rounded mb-3" src="src/img/<?= $m["gambar"] ?>" width="150" alt="<?= $m["nama"] ?>">
+                <form name="tambah_pesanan" action="function.php" method="POST">
+                    <input type="hidden" name="id_menu" value="<?= $m["id_menu"] ?>">
+                    <input type="hidden" name="harga" value="<?= $m["harga"] ?>">
                     <table class="table table-striped table-responsive-sm">
-
                         <tr>
-
                             <td>Harga</td>
-
                             <td>:</td>
-
-                            <td class="card-text">Rp<?= $m["harga"]; ?></td>
-
+                            <td>Rp<?= $m["harga"] ?></td>
                         </tr>
-
                         <tr>
-
                             <td>Kategori</td>
-
                             <td>:</td>
-
-                            <td class="card-text"><?= $m["kategori"]; ?></td>
-
+                            <td><?= $m["kategori"] ?></td>
                         </tr>
-
                         <tr>
-
                             <td>Stok</td>
-
                             <td>:</td>
-
-                            <td class="card-text"><?= $m["stok"]; ?></td>
-
+                            <td><?= $m["stok"] ?></td>
                         </tr>
                         <tr>
-
                             <td>Jumlah</td>
-
                             <td>:</td>
-
-                            <td class="card-text"><input min="0" type="number" name="qty<?= $i; ?>"></td>
-
+                            <td><input min="1" max="<?= $m["stok"] ?>" type="number" name="jumlah" required></td>
                         </tr>
-                     
-
+                        <tr>
+                            <td colspan="3">
+                                <button type="submit" name="pesan" class="btn btn-primary btn-block">Pesan</button>
+                            </td>
+                        </tr>
                     </table>
-
-                    <?php if (isset($_SESSION["akun-admin"])) { ?>
-
-                    <p>
-
-                        <a class="btn btn-lg btn-warning" title="Edit" href="edit.php?id_menu=<?= $m["id_menu"]; ?>">
-
-                            <i class="bi bi-pencil-fill"></i>
-
-                        </a>
-
-                        <a class="btn btn-lg btn-danger" title="Hapus" href="hapus.php?id_menu=<?= $m["id_menu"]; ?>" onclick="return confirm('Ingin Menghapus Menu?')">
-
-                            <i class="bi bi-trash3-fill"></i>
-
-                        </a>
-
-                    </p>
-
-                    <?php } ?>
-
+                </form>
+                <?php if (isset($_SESSION["akun-admin"])): ?>
+                <div class="mt-3">
+                    <a class="btn btn-warning" href="edit.php?id_menu=<?= $m["id_menu"] ?>">
+                        <i class="bi bi-pencil-fill"></i> Edit
+                    </a>
+                    <a class="btn btn-danger" href="hapus.php?id_menu=<?= $m["id_menu"] ?>"
+                        onclick="return confirm('Ingin Menghapus Menu?')">
+                        <i class="bi bi-trash3-fill"></i> Hapus
+                    </a>
                 </div>
-
+                <?php endif; ?>
             </div>
-
         </div>
-
-    <?php $i++; } ?>
-
+    </div>
+    <?php endforeach; ?>
     </form>
 
 </div>

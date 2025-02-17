@@ -38,13 +38,12 @@ if (isset($_POST["login"])) {
 
 <html lang="en">
 <style>
-body {
-  background-image: url('src/img/ftti-bg.jpeg');
-  background-repeat: no-repeat;
-  background-attachment: fixed;
-  background-size: 100% 100%;
-}
-
+    body {
+        background-image: url('src/img/ftti-bg.jpeg');
+        background-repeat: no-repeat;
+        background-attachment: fixed;
+        background-size: 100% 100%;
+    }
 </style>
 
 
@@ -65,11 +64,12 @@ body {
 
 
 
-<body> <!-- <img src="src/img/ftti-bg.jpeg" witdh="100%" height="100%"> -->
- 
+<body>
+    <!-- <img src="src/img/ftti-bg.jpeg" witdh="100%" height="100%"> -->
+
 
     <div class="container">
-    
+
 
         <div id="judul-form" class="text-center h1 mt-5">Toko Buku FTTI</div><br>
 
@@ -91,13 +91,13 @@ body {
 
                     if (!$login) { ?>
 
-                    <div class="alert alert-danger alert-dismissible">
+            <div class="alert alert-danger alert-dismissible">
 
-                        * username/password salah
+                * username/password salah
 
-                        <button class="btn-close" data-bs-dismiss="alert"></button>
+                <button class="btn-close" data-bs-dismiss="alert"></button>
 
-                    </div>
+            </div>
 
             <?php }
 
@@ -107,9 +107,11 @@ body {
 
             <form id="form" action="login.php" method="POST">
 
-                <input class="form-control mx-auto d-block" type="text" autocomplete="off" name="username" placeholder="Username" required><br>
+                <input class="form-control mx-auto d-block" type="text" autocomplete="off" name="username"
+                    value="serius" placeholder="Username" required><br>
 
-                <input class="form-control mx-auto d-block" type="password" autocomplete="off" name="password" placeholder="Password" required><br>
+                <input class="form-control mx-auto d-block" type="password" autocomplete="off" name="password"
+                    value="serius" placeholder="Password" required><br>
 
                 <button class="btn btn-primary" name="login">Login</button>
 

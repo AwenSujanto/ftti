@@ -124,13 +124,16 @@ if (isset($_POST["pesan"])) {
 
     <!-- List Menu -->
 
-    <div id="dropdown-menu" class="container-fluid position-fixed float-start bg-dark text-white w-auto vh-100" style="display: none; z-index: 1; top: 50px;">
+    <div id="dropdown-menu" class="container-fluid position-fixed float-start bg-dark text-white w-auto vh-100"
+        style="display: none; z-index: 1; top: 50px;">
 
         <ul>
 
             <br>
 
             <li><a class="text-decoration-none p-2 h5 text-light" href="index.php">MENU</a></li><br>
+            <li><a class="text-decoration-none p-2 h5 text-light" href="index.php?pesanan_saya">PESANAN SAYA</a></li>
+            <br>
 
             <?php if (isset($_SESSION["akun-admin"])) { ?>
 
@@ -148,11 +151,12 @@ if (isset($_POST["pesan"])) {
 
     <div class="container" style="z-index: -1; margin-top: 60px;">
 
-    <?php
+        <?php
 
     if (isset($_GET["pesanan"])) include "halaman/pesanan.php";
 
     else if (isset($_GET["transaksi"])) include "halaman/transaksi.php";
+    else if (isset($_GET["pesanan_saya"])) include "halaman/pesanan_saya.php";
 
     else include "halaman/beranda.php";
 

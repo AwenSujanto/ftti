@@ -1,8 +1,53 @@
 <?php
 
 
-$koneksi = mysqli_connect("localhost", "root", "", "toko_buku_ftti");
+$koneksi = mysqli_connect("localhost", "root", "root", "toko_buku_ftti");
 
+
+session_start();
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if (isset($_POST['pesan']) ) {
+        tambah_pesanan($_POST);
+    }
+}
+
+/**
+ * Tambahkan pesanan ke database.
+ *
+ * @param array $data Data pesanan
+ *                      - id_menu: ID menu yang dipesan
+ *                      - jumlah: Jumlah menu yang dipesan
+ *                      - harga: Harga menu yang dipesan
+ *
+ * @return void
+ */
+function tambah_pesanan($data) {
+    global $koneksi;
+
+    $id_user = $_SESSION['user_id'] ?? 0;
+    $id_menu = $data['id_menu'];
+    $jumlah = $data['jumlah'];
+    $harga = $data['harga'];
+    $total_harga = $jumlah * $harga;
+
+    $query = "INSERT INTO pesanan (id_user, id_menu, jumlah, total_harga) VALUES (?, ?, ?, ?)";
+    $stmt = $koneksi->prepare($query);
+    $stmt->bind_param("iiid", $id_user, $id_menu, $jumlah, $total_harga);
+
+    // Update stok di tabel menu
+        $update_query = "UPDATE menu SET stok = stok - ? WHERE id_menu = ?";
+        $update_stmt = $koneksi->prepare($update_query);
+        $update_stmt->bind_param("ii", $jumlah, $id_menu);
+        $update_stmt->execute();
+
+    if ($stmt->execute()) {
+        header("Location: index.php?pesan=sukses");
+    } else {
+        header("Location: index.php?pesan=gagal");
+    }
+    exit();
+}
 
 // Funtion Register
 
