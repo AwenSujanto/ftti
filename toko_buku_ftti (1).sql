@@ -149,7 +149,7 @@ CREATE TABLE `pesanan` (
   `id_menu` int(11) NOT NULL,
   `jumlah` int(11) NOT NULL,
   `total_harga` decimal(10,2) NOT NULL,
-  `status` enum('pending','diproses','selesai','dibatalkan') DEFAULT 'pending',
+  `status` enum('pending','diproses','selesai','dibatalkan', 'lunas cash', 'lunas tf') DEFAULT 'pending',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp(),
   PRIMARY KEY (`id_pesanan`)

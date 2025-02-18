@@ -20,6 +20,11 @@ $stmt->execute();
 $result = $stmt->get_result();
 $pesanan = $result->fetch_all(MYSQLI_ASSOC);
 
+$totalKeseluruhan = 0; // Inisialisasi total keseluruhan
+foreach ($pesanan as $p) {
+    $totalKeseluruhan += $p['total_harga']; // Menjumlahkan total harga setiap pesanan
+}
+
 class PDF extends FPDF
 {
     function Header()
@@ -30,10 +35,10 @@ class PDF extends FPDF
         $this->Ln(20);
     }
 }
+
 $pdf = new PDF();
 $pdf->AddPage();
 $pdf->SetFont('Arial','B',10);
-
 
 // Tambahkan nama pemesan
 $pdf->Cell(0,10,'Nama Pemesan: '.$_SESSION["akun-user"]['username'],0,1);
@@ -62,5 +67,10 @@ foreach($pesanan as $index => $p) {
     
     $pdf->SetY($pdf->GetY());
 }
+
+$pdf->Ln(10); // Tambahkan jarak sebelum total keseluruhan
+$pdf->SetFont('Arial','B',10);
+$pdf->Cell(150,10,'Total :',0,0,'R');
+$pdf->Cell(40,10,'Rp '.number_format($totalKeseluruhan,0,',','.'),0,1,'R');
 
 $pdf->Output();
