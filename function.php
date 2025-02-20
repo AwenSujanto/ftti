@@ -2,7 +2,12 @@
 
 $koneksi = mysqli_connect("localhost", "root", "root", "toko_buku_ftti");
 
-session_start();
+//session start lama
+//session_start();
+
+if (session_status() === PHP_SESSION_NONE) {
+    session_start();
+}
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['pesan']) ) {
