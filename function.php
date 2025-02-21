@@ -1,6 +1,6 @@
 <?php
 
-$koneksi = mysqli_connect("localhost", "root", "root", "toko_buku_ftti");
+$koneksi = mysqli_connect("localhost", "root", "", "toko_buku_ftti");
 
 session_start();
 
