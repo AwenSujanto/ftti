@@ -1,0 +1,57 @@
+# Aktifkan mod_rewrite
+RewriteEngine On
+
+# Redirect www ke non-www (opsional)
+RewriteCond %{HTTP_HOST} ^www\.(.*)$ [NC]
+RewriteRule ^(.*)$ http://%1/$1 [R=301,L]
+
+# Redirect HTTP ke HTTPS (opsional, jika pakai SSL)
+RewriteCond %{HTTPS} !=on
+RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Menampilkan error untuk debugging
+php_flag display_errors On
+php_value error_reporting 32767
+
+# Mengatur default index file
+DirectoryIndex index.php
+
+# URL Rewriting untuk halaman tanpa ekstensi .php
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
+
+# Blok akses ke file .htaccess dan file sensitif lainnya
+<FilesMatch "^\.ht">
+    Order Allow,Deny
+    Deny from all
+</FilesMatch>
+
+# Aktifkan Gzip Compression
+<IfModule mod_deflate.c>
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
+    application/json
+</IfModule>
+
+# Atur caching agar meningkatkan kecepatan loading
+<IfModule mod_expires.c>
+    ExpiresActive On
+    ExpiresDefault "access plus 1 month"
+    ExpiresByType text/css "access plus 1 month"
+    ExpiresByType text/javascript "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 1 year"
+    ExpiresByType image/png "access plus 1 year"
+    ExpiresByType image/gif "access plus 1 year"
+    ExpiresByType application/pdf "access plus 1 year"
+</IfModule>
+
+# Mencegah hotlinking gambar
+RewriteCond %{HTTP_REFERER} !^$
+RewriteCond %{HTTP_REFERER} !^https?://(www\.)?domainanda\.com [NC]
+RewriteRule \.(jpg|jpeg|png|gif)$ - [F]
+
+# Atur batasan ukuran upload (opsional)
+php_value upload_max_filesize 64M
+php_value post_max_size 64M
+php_value max_execution_time 300
+php_value max_input_time 300

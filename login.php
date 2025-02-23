@@ -117,10 +117,10 @@ require_once "function.php";
             <form id="form" action="login.php" method="POST">
 
                 <input class="form-control mx-auto d-block" type="text" autocomplete="off" name="username"
-                    value="serius" placeholder="Username" required><br>
+                    placeholder="Username" required><br>
 
                 <input class="form-control mx-auto d-block" type="password" autocomplete="off" name="password"
-                    value="serius" placeholder="Password" required><br>
+                    placeholder="Password" required><br>
 
                 <button class="btn btn-primary" name="login">Login</button>
 
