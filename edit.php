@@ -91,7 +91,7 @@ $menu = ambil_data("SELECT * FROM menu WHERE id_menu = $id_menu")[0];
 
     <div class="container">
 
-        <h1>Edit Data Masakan</h1>
+        <h1>Edit Data Barang</h1>
 
         <a class="btn btn-success fw-bold" href="index.php">Kembali</a>
 
@@ -109,7 +109,7 @@ $menu = ambil_data("SELECT * FROM menu WHERE id_menu = $id_menu")[0];
 
                     <tr>
 
-                        <td><label for="nama">Nama Makanan</label></td>
+                        <td><label for="nama">Nama Barang</label></td>
 
                         <td>:</td>
 
@@ -123,7 +123,8 @@ $menu = ambil_data("SELECT * FROM menu WHERE id_menu = $id_menu")[0];
 
                         <td>:</td>
 
-                        <td><input min="0" type="number" name="harga" id="harga" value="<?= $menu["harga"]; ?>" required></td>
+                        <td><input min="0" type="number" name="harga" id="harga" value="<?= $menu["harga"]; ?>"
+                                required></td>
 
                     </tr>
 
@@ -155,13 +156,17 @@ $menu = ambil_data("SELECT * FROM menu WHERE id_menu = $id_menu")[0];
 
                                 <option value="ATK" <?= $menu["kategori"] == "ATK" ? "selected" : ""; ?>>ATK</option>
 
-                                <option value="Buku Rohani" <?= $menu["kategori"] == "Buku Rohani" ? "selected" : ""; ?>>Buku Rohani</option>
+                                <option value="Buku Rohani"
+                                    <?= $menu["kategori"] == "Buku Rohani" ? "selected" : ""; ?>>Buku Rohani</option>
 
-                                <option value="Living" <?= $menu["kategori"] == "Living" ? "selected" : ""; ?>>Living</option>
+                                <option value="Living" <?= $menu["kategori"] == "Living" ? "selected" : ""; ?>>Living
+                                </option>
 
-                                <option value="Dessert" <?= $menu["kategori"] == "Dessert" ? "selected" : ""; ?>>Dessert</option>
+                                <option value="Dessert" <?= $menu["kategori"] == "Dessert" ? "selected" : ""; ?>>Dessert
+                                </option>
 
-                                <option value="Minuman" <?= $menu["kategori"] == "Minuman" ? "selected" : ""; ?>>Minuman</option>
+                                <option value="Minuman" <?= $menu["kategori"] == "Minuman" ? "selected" : ""; ?>>Minuman
+                                </option>
 
                             </select>
 
@@ -177,7 +182,7 @@ $menu = ambil_data("SELECT * FROM menu WHERE id_menu = $id_menu")[0];
 
                         <td>
 
-<input type="number" name="stok" value="<?= $menu["stok"]?>">
+                            <input type="number" name="stok" value="<?= $menu["stok"]?>">
                         </td>
 
                     </tr>
