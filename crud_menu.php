@@ -1,6 +1,4 @@
 <?php
-// Koneksi ke database
-$koneksi = mysqli_connect("localhost", "root", "", "toko_buku_ftti");
 
 // Cek koneksi
 if (mysqli_connect_errno()) {
@@ -52,11 +50,13 @@ $result = mysqli_query($koneksi, $query);
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>CRUD Menu</title>
 </head>
+
 <body>
 
     <h1>CRUD Menu</h1>
@@ -81,9 +81,9 @@ $result = mysqli_query($koneksi, $query);
 
         <label for="status">Status:</label>
         <select name="status" id="status"></select>
-           
-            <option value="tersedia">Tersedia</option>
-            <option value="tidak tersedia">Tidak Tersedia</option>
+
+        <option value="tersedia">Tersedia</option>
+        <option value="tidak tersedia">Tidak Tersedia</option>
         </select><br>
 
         <button type="submit" name="tambah">Tambah Menu</button>
@@ -103,19 +103,20 @@ $result = mysqli_query($koneksi, $query);
             <th>Aksi</th>
         </tr>
         <?php while ($row = mysqli_fetch_assoc($result)) { ?>
-            <tr>
-                <td><?php echo $row['id_menu']; ?></td>
-                <td><?php echo $row['kode_menu']; ?></td>
-                <td><?php echo $row['nama']; ?></td>
-                <td><?php echo $row['harga']; ?></td>
-                <td><?php echo $row['gambar']; ?></td>
-                <td><?php echo $row['kategori']; ?></td>
-                <td><?php echo $row['stok']; ?></td>
-                <td>
-                    <a href="crud_menu.php?edit=<?php echo $row['id_menu']; ?>">Edit</a> |
-                    <a href="crud_menu.php?hapus=<?php echo $row['id_menu']; ?>" onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
-                </td>
-            </tr>
+        <tr>
+            <td><?php echo $row['id_menu']; ?></td>
+            <td><?php echo $row['kode_menu']; ?></td>
+            <td><?php echo $row['nama']; ?></td>
+            <td><?php echo $row['harga']; ?></td>
+            <td><?php echo $row['gambar']; ?></td>
+            <td><?php echo $row['kategori']; ?></td>
+            <td><?php echo $row['stok']; ?></td>
+            <td>
+                <a href="crud_menu.php?edit=<?php echo $row['id_menu']; ?>">Edit</a> |
+                <a href="crud_menu.php?hapus=<?php echo $row['id_menu']; ?>"
+                    onclick="return confirm('Apakah Anda yakin ingin menghapus?')">Hapus</a>
+            </td>
+        </tr>
         <?php } ?>
     </table>
 
@@ -144,14 +145,14 @@ $result = mysqli_query($koneksi, $query);
 <script>
     let status = 1; // atau 0, tergantung nilai yang ingin Anda periksa
 
-let ketersediaan;
-if (status === 1) {
-    ketersediaan = "Tersedia";
-} else {
-    ketersediaan = "Tidak Tersedia";
-}
+    let ketersediaan;
+    if (status === 1) {
+        ketersediaan = "Tersedia";
+    } else {
+        ketersediaan = "Tidak Tersedia";
+    }
 
-console.log(ketersediaan); // Output: "Tersedia" jika status = 1, "Tidak Tersedia" jika status = 0
-
+    console.log(ketersediaan); // Output: "Tersedia" jika status = 1, "Tidak Tersedia" jika status = 0
 </script>
+
 </html>

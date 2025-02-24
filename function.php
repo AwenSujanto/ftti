@@ -1,9 +1,5 @@
 <?php
 
-$koneksi = mysqli_connect("localhost", "root", "root", "toko_buku_ftti");
-
-//session start lama
-//session_start();
 
 if (session_status() === PHP_SESSION_NONE) {
     session_start();

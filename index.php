@@ -3,6 +3,7 @@
 session_start();
 
 require_once "function.php";
+require_once "config.php";
 
 if (!isset($_SESSION["akun-admin"]) && !isset($_SESSION["akun-user"])) {
 
@@ -164,7 +165,7 @@ if (isset($_POST["pesan"])) {
 
     </div>
 
-    <script src="./src/css/bootstrap-5.2.0/js/bootstrap.min.js"></script>
+    <script src="src/css/bootstrap-5.2.0/js/bootstrap.min.js"></script>
 
     <script src="src/js/beranda.js"></script>
 
