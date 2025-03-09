@@ -29,8 +29,7 @@ RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
 
 # Aktifkan Gzip Compression
 <IfModule mod_deflate.c>
-    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript
-    application/json
+    AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css text/javascript application/javascript application/json
 </IfModule>
 
 # Atur caching agar meningkatkan kecepatan loading
@@ -45,9 +44,10 @@ RewriteRule ^(.+)$ index.php?url=$1 [QSA,L]
     ExpiresByType application/pdf "access plus 1 year"
 </IfModule>
 
-# Mencegah hotlinking gambar
+# Mencegah hotlinking gambar, tetapi izinkan dari domain sendiri
 RewriteCond %{HTTP_REFERER} !^$
 RewriteCond %{HTTP_REFERER} !^https?://(www\.)?domainanda\.com [NC]
+RewriteCond %{HTTP_REFERER} !^https?://domainanda\.com [NC]
 RewriteRule \.(jpg|jpeg|png|gif)$ - [F]
 
 # Atur batasan ukuran upload (opsional)
@@ -55,3 +55,18 @@ php_value upload_max_filesize 64M
 php_value post_max_size 64M
 php_value max_execution_time 300
 php_value max_input_time 300
+
+# BEGIN cPanel-generated php ini directives, do not edit
+<IfModule php7_module>
+   php_value memory_limit 128M
+   php_value upload_max_filesize 64M
+   php_value post_max_size 64M
+   php_value max_execution_time 300
+</IfModule>
+<IfModule lsapi_module>
+   php_value memory_limit 128M
+   php_value upload_max_filesize 64M
+   php_value post_max_size 64M
+   php_value max_execution_time 300
+</IfModule>
+# END cPanel-generated php ini directives, do not edit
