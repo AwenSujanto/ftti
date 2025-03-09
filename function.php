@@ -171,6 +171,10 @@ function ambil_data($query)
 
 
     $db = [];
+    $query = "SELECT p.id_pesanan, p.id_user, p.id_menu, p.jumlah, p.total_harga, p.status, p.created_at, t.kode_pesanan
+          FROM pesanan p
+          JOIN transaksi t ON p.id_pesanan = t.id_transaksi
+          WHERE t.kode_pesanan = '$kode_pesanan'";
 
     $sql_query = mysqli_query($koneksi, $query);
 
